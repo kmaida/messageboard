@@ -7,6 +7,7 @@
 
 # config
 /server/config.js
+/src/auth/auth.config.ts
 
 # dependencies
 /node_modules
