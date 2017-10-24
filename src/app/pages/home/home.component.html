@@ -1,0 +1,16 @@
+<ng-template [ngIf]="auth.authStatePending === false">
+  <p class="lead" *ngIf="!auth.loggedIn">
+    You must log in to access content on this site.
+  </p>
+
+  <div *ngIf="auth.loggedIn">
+    <section id="forums">
+      <h2 class="pb-2">Message Board</h2>
+      <app-tags [showNew]="true"></app-tags>
+      <app-forums-list></app-forums-list>
+    </section>
+  </div>
+</ng-template>
+
+<app-loading *ngIf="auth.authStatePending" size="large"></app-loading>
+<app-error *ngIf="auth.authError"></app-error>

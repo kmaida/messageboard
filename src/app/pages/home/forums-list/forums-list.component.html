@@ -1,0 +1,40 @@
+<app-loading *ngIf="utils.loading(forums, error)" size="large"></app-loading>
+<app-error *ngIf="error" [error]="error"></app-error>
+
+<ng-template [ngIf]="utils.loadSuccess(forums, error)">
+  <p *ngIf="!forums.length" class="lead">
+    There are no forums available yet. Would you like to create one?
+  </p>
+
+  <div *ngIf="forums.length" class="list-group mb-3">
+    <div
+      *ngFor="let forum of forums; index as i; trackBy: trackForums"
+      class="list-group-item flex-column align-items-start">
+      <div id="forum-{{i}}" class="d-flex w-100 justify-content-between">
+        <app-forum-form
+          *ngIf="editingThisForum(forum._id)"
+          (cancelEdit)="onCancelEdit()"
+          [editForumObj]="makeEditObj(forum)"
+          (editForum)="onEditForum($event)"
+          class="w-100"></app-forum-form>
+        <ng-template [ngIf]="!editingThisForum(forum._id)">
+          <a [routerLink]="['/forum', forum._id]" class="text-dark">
+            <strong [innerHTML]="forum.title"></strong>
+          </a>
+          <a class="text-primary link small mb-1" (click)="editForum(forum._id)">Edit</a>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <button
+      *ngIf="!showForumForm"
+      class="btn btn-primary btn-block"
+      (click)="toggleForumForm()">Create a New Forum</button>
+    <ng-template [ngIf]="showForumForm">
+      <h4>Create a New Forum</h4>
+      <app-forum-form (submitForum)="onSubmitForum($event)"></app-forum-form>
+    </ng-template>
+  </section>
+</ng-template>

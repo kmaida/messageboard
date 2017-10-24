@@ -1,0 +1,13 @@
+<nav id="breadcrumbs">
+  <ul>
+    <li class="crumb-home">
+      <a routerLink="/">All Forums</a>
+    </li>
+    <li class="crumb-forum" *ngIf="forum">
+      <a [routerLink]="['/forum', forum._id]">{{forum.title}}</a>
+    </li>
+    <li class="crumb-edit-topic" *ngIf="topic">
+      <a [routerLink]="['/topic', topic._id]">{{topic.title}} (original)</a>
+    </li>
+  </ul>
+</nav>

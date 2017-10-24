@@ -1,0 +1,17 @@
+<header class="header p-1 mb-3 clearfix">
+  <div class="header-auth float-right">
+    <button
+      *ngIf="!auth.loggedIn && !auth.authStatePending"
+      class="btn btn-sm btn-success"
+      (click)="auth.login()">Log In</button>
+
+    <span *ngIf="auth.loggedIn && auth.userAlias">
+      <img class="profileImg" [src]="auth.userProfile?.picture">
+      {{auth.userAlias}}
+      <button
+        class="btn btn-sm btn-danger"
+        (click)="auth.logout()">Log Out</button>
+    </span>
+  </div>
+
+</header>

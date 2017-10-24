@@ -1,0 +1,12 @@
+<app-error *ngIf="error" [error]="error"></app-error>
+
+<ng-template [ngIf]="utils.loadSuccess(forum, error)">
+  <app-breadcrumbs></app-breadcrumbs>
+  <h2 [innerHTML]="forum.title" class="pb-2"></h2>
+  <app-topics-list [forumId]="id"></app-topics-list>
+
+  <a
+    *ngIf="!showForumForm"
+    class="btn btn-primary btn-block"
+    [routerLink]="['/forum', id, 'topic', 'new']">Create a New Topic</a>
+</ng-template>

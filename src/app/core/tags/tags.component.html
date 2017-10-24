@@ -1,0 +1,11 @@
+<section
+  id="topic-tags"
+  class="tags-container mb-3">
+  <strong>Tags:</strong>
+  <app-loading *ngIf="!tags" size="small"></app-loading>
+  <ng-template [ngIf]="tags?.length">
+    <span *ngFor="let tag of fs.orderBy(tags, 'tag'); last as last"><a [routerLink]="['/topics', 'tag', tag.slug]">{{tag.tag}}</a>{{tagSeparator(last)}}</span>
+  </ng-template>
+  <em *ngIf="tags && !tags.length">(none)</em>
+  <a *ngIf="showNew" class="btn btn-mini btn-primary" routerLink="/tag/new">New Tag</a>
+</section>

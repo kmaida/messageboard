@@ -1,0 +1,28 @@
+<app-error *ngIf="error" [error]="error"></app-error>
+
+<form (ngSubmit)="onSubmit()" #tplPostForm="ngForm">
+  <textarea
+    id="post-text"
+    name="post-text"
+    class="form-control"
+    rows="10"
+    maxlength="6000"
+    required
+    [(ngModel)]="postForm.post_text"
+    [disabled]="submitting"></textarea>
+  <p class="text-right pt-2">
+    <app-loading
+      *ngIf="submitting"
+      size="small"></app-loading>
+    <ng-template [ngIf]="!submitting">
+      <a
+        *ngIf="isEdit"
+        class="btn btn-link btn-sm text-secondary"
+        (click)="emitCancelEdit()">Cancel</a>
+      <button
+        class="btn btn-primary"
+        [ngClass]="{'btn-sm': isEdit}"
+        [disabled]="!tplPostForm.valid">Submit</button>
+    </ng-template>
+  </p>
+</form>

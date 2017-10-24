@@ -1,0 +1,34 @@
+<app-loading *ngIf="utils.loading(tagForm, error)" size="large"></app-loading>
+
+<ng-template [ngIf]="utils.loadSuccess(tagForm, error)">
+  <app-breadcrumbs></app-breadcrumbs>
+
+  <h2 class="pb-2">Create a New Tag</h2>
+
+  <div *ngIf="success" class="alert alert-success">
+    <strong>Success!</strong> The "{{success}}" tag has been added.
+  </div>
+
+  <app-error *ngIf="error"></app-error>
+
+  <form (ngSubmit)="onSubmit()" #tplTagForm="ngForm">
+    <div class="form-group">
+      <label for="title">Tag:</label>
+      <input
+        type="text"
+        id="tag"
+        name="tag"
+        class="form-control"
+        [(ngModel)]="tagForm.tag"
+        maxlength="30"
+        required>
+    </div>
+    <p class="text-right">
+      <app-loading *ngIf="submitting" size="small"></app-loading>
+      <button
+        *ngIf="!submitting"
+        class="btn btn-primary"
+        [disabled]="!tplTagForm.valid">Save Tag</button>
+    </p>
+  </form>
+</ng-template>

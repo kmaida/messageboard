@@ -1,0 +1,19 @@
+.header {
+  font-size: 12px;
+
+  &-title {
+    font-size: 16px;
+    line-height: 28px;
+  }
+  .btn {
+    font-size: 12px;
+    margin-left: 2px;
+  }
+}
+.profileImg {
+  border-radius: 100px;
+  display: inline-block;
+  height: 28px;
+  margin-right: 2px;
+  width: 28px;
+}

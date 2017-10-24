@@ -1,0 +1,23 @@
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+li {
+  display: inline-block;
+  font-size: 13px;
+
+  &:after {
+    content: '›';
+  }
+  &:last-child:after {
+    content: none;
+  }
+}
+a {
+  color: rgba(0,0,0,.7);
+
+  &:hover {
+    color: rgba(0,0,0,1);
+    text-decoration: none;
+  }
+}

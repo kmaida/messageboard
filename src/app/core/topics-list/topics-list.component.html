@@ -1,0 +1,19 @@
+<app-loading *ngIf="utils.loading(topics, error)" size="large"></app-loading>
+<app-error *ngIf="error" [error]="error"></app-error>
+
+<ng-template [ngIf]="utils.loadSuccess(topics, error)">
+  <section *ngIf="topics.length" class="list-group mb-3">
+    <div
+      *ngFor="let topic of fs.orderBy(topics, 'sticky'); index as i"
+      class="list-group-item flex-column align-items-start">
+      <div id="topic-{{i}}" class="d-flex w-100 justify-content-between">
+        <a [routerLink]="['/topic', topic._id]" class="text-dark">
+          <span *ngIf="topic.sticky" class="badge badge-pill badge-success">sticky</span><strong [innerHTML]="topic.title"></strong>
+        </a>
+        <a class="text-primary link small mb-1" [routerLink]="['/topic', topic._id, 'edit']">Edit</a>
+      </div>
+    </div>
+  </section>
+
+  <p *ngIf="!topics.length" class="lead">There are no topics here.</p>
+</ng-template>

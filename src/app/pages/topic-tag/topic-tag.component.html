@@ -1,0 +1,22 @@
+<app-loading *ngIf="utils.loading(tag, error)" size="large"></app-loading>
+<app-error *ngIf="error" [error]="error"></app-error>
+
+<ng-template [ngIf]="utils.loadSuccess(tag, error)">
+  <app-breadcrumbs></app-breadcrumbs>
+  <h2 class="pb-2">Topics Tagged "{{tag.tag}}"</h2>
+
+  <app-topics-list [tagSlug]="tagSlug"></app-topics-list>
+  <p>
+    <a class="btn btn-primary btn-block" routerLink="/tag/new">Create a New Tag</a>
+  </p>
+
+  <section id="deleteTag" class="delete card mt-4 p-3">
+    <h4 class="text-danger">Danger Zone</h4>
+    <p><strong>Warning:</strong> Proceeding will permanently delete the <strong>"{{tag.tag}}"</strong> tag and remove it from all topics. Please make <em>absolutely sure</em> this is what you want to do.</p>
+    <app-error *ngIf="deleteError" [error]="deleteError"></app-error>
+    <p class="mb-0">
+      <a *ngIf="!deleting" class="btn btn-danger btn-sm" (click)="deleteTag()">Delete <strong>"{{tag.tag}}"</strong> Tag</a>
+      <span *ngIf="deleting" class="text-danger">Deleting...</span>
+    </p>
+  </section>
+</ng-template>

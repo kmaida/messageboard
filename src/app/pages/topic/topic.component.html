@@ -1,0 +1,13 @@
+<app-loading *ngIf="utils.loading(topic, error)" size="large"></app-loading>
+<app-error *ngIf="error" [error]="error"></app-error>
+
+<ng-template [ngIf]="utils.loadSuccess(topic, error) && id">
+  <app-breadcrumbs *ngIf="forum" [forum]="forum"></app-breadcrumbs>
+
+  <h2 class="pb-2">
+    {{topic.title}} <a class="btn btn-mini btn-primary" routerLink="edit">Edit Topic</a>
+  </h2>
+
+  <app-tags [tags]="topic.tags"></app-tags>
+  <app-posts-list [topicId]="id"></app-posts-list>
+</ng-template>

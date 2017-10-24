@@ -1,0 +1,5 @@
+module.exports = {
+  AUTH0_DOMAIN: '<your_Auth0_domain>',
+  AUTH0_API_AUDIENCE: 'http://localhost:8085/api/',
+  MONGO_URI: process.env.MONGO_URI || 'mongodb://<user>:<password>@<host>:27017/<db>'
+};

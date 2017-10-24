@@ -1,0 +1,44 @@
+<app-error *ngIf="error" [error]="error"></app-error>
+
+<form (ngSubmit)="onSubmit()" #tplForumForm="ngForm">
+  <div class="form-group row" [ngClass]="{'mb-0': isEdit}">
+    <div class="col-sm-9 my-1">
+      <input
+        id="title"
+        name="title"
+        type="text"
+        class="form-control"
+        maxlength="200"
+        required
+        [(ngModel)]="forumForm.title"
+        [disabled]="submitting">
+    </div>
+    <div class="col-sm-3 text-right" [ngClass]="isEdit ? 'my-2' : 'my-1'">
+      <ng-template [ngIf]="isEdit">
+        <app-loading
+          *ngIf="submitting"
+          size="small"
+          [fillSpace]="true"></app-loading>
+        <ng-template [ngIf]="!submitting">
+          <a
+            class="btn btn-link btn-sm text-secondary px-0"
+            (click)="emitCancelEdit()">Cancel</a>
+          <button
+            class="btn btn-primary btn-sm"
+            [disabled]="!tplForumForm.valid">Save</button>
+        </ng-template>
+      </ng-template>
+      <ng-template [ngIf]="!isEdit">
+        <app-loading
+          *ngIf="submitting"
+          size="small"
+          [fillSpace]="true"
+          paddingClass="py-1"></app-loading>
+        <button
+          *ngIf="!submitting"
+          class="btn btn-primary btn-block"
+          [disabled]="!tplForumForm.valid">Submit</button>
+      </ng-template>
+    </div>
+  </div>
+</form>

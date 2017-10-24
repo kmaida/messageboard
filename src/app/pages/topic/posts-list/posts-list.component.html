@@ -1,0 +1,38 @@
+<app-loading *ngIf="utils.loading(posts, error)" size="large"></app-loading>
+<app-error *ngIf="error" [error]="error"></app-error>
+
+<ng-template [ngIf]="utils.loadSuccess(posts, error)">
+  <div class="text-right">
+    <a
+      [routerLink]
+      [fragment]="latestPostId"
+      class="text-primary link small">&darr; Go to Latest Post</a>
+  </div>
+  <ul *ngIf="posts.length" class="posts-list">
+    <li *ngFor="let post of posts; index as i; trackBy: trackPosts" class="post" #postLoop>
+      <div id="post-{{i}}">
+        <div *ngIf="!editingThisPost(post._id)" class="post-text" [innerHTML]="utils.newlinesToMarkup(post.post_text)"></div>
+        <app-error *ngIf="deleteError === post._id"></app-error>
+        <app-post-form
+          *ngIf="editingThisPost(post._id)"
+          (cancelEdit)="onCancelEdit()"
+          [index]="i"
+          [topicId]="topicId"
+          [editPostObj]="makeEditObj(post)"
+          (editPost)="onEditPost($event)"></app-post-form>
+        <div class="post-meta clearfix">
+          <span class="float-left"><a [routerLink] fragment="post-{{i}}">#</a> {{post.author}} | {{post.datetime | date:'short'}} | <a [routerLink] fragment="post-{{i}}" (click)="editPost(post._id, i)">Edit Post</a></span>
+          <span class="float-right"><a class="text-danger link" (click)="deletePost(post._id)">Delete</a></span>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <div id="reply" class="pt-2">
+    <h4>Post a Reply</h4>
+    <app-post-form
+      *ngIf="posts"
+      [topicId]="topicId"
+      (submitPost)="onSubmitPost($event)"></app-post-form>
+  </div>
+</ng-template>

@@ -1,0 +1,70 @@
+<app-loading *ngIf="utils.loading(topicForm, error)" size="large"></app-loading>
+<app-error *ngIf="error"></app-error>
+
+<ng-template [ngIf]="utils.loadSuccess(topicForm, error)">
+  <app-breadcrumbs
+    *ngIf="originalTopic"
+    [forumId]="originalTopic.forum_id"
+    [topic]="originalTopic"></app-breadcrumbs>
+
+  <app-breadcrumbs
+    *ngIf="!originalTopic && forumId"
+    [forumId]="forumId"></app-breadcrumbs>
+
+  <h2 class="pb-2">{{pageTitle}}</h2>
+
+  <form (ngSubmit)="onSubmit()" #tplTopicForm="ngForm">
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        class="form-control"
+        [(ngModel)]="topicForm.title"
+        maxlength="200"
+        required>
+    </div>
+    <!-- Tags -->
+    <div *ngIf="tags" class="tags">
+      <label>Tags:</label>
+      <div class="tags-container mb-3">
+        <span *ngFor="let tag of tags; index as i; trackBy: trackTags">
+          <a
+            class="btn btn-sm mb-1"
+            (click)="updateTagMap(tag.slug)"
+            [ngClass]="tagMap[tag.slug] ? 'btn-success' : 'btn-light'">{{tag.tag}}</a>
+        </span>
+      </div>
+    </div>
+    <!-- Sticky -->
+    <div class="form-check">
+      <label class="form-check-label">
+        <input
+          type="checkbox"
+          id="sticky"
+          name="sticky"
+          class="form-check-input"
+          [(ngModel)]="topicForm.sticky">
+        Stick to Top
+      </label>
+    </div>
+    <p class="text-right">
+      <app-loading *ngIf="submitting" size="small"></app-loading>
+      <button
+        *ngIf="!submitting"
+        class="btn btn-primary"
+        [disabled]="!tplTopicForm.valid">Save Topic</button>
+    </p>
+  </form>
+
+  <section *ngIf="isEdit" id="deleteTopic" class="delete card mt-4 p-3">
+    <h4 class="text-danger">Danger Zone</h4>
+    <p><strong>Warning:</strong> Proceeding will permanently delete this topic along with all of its posts. Please make <em>absolutely sure</em> this is what you want to do.</p>
+    <app-error *ngIf="deleteError" [error]="deleteError"></app-error>
+    <p class="mb-0">
+      <a *ngIf="!deleting" class="btn btn-danger btn-sm" (click)="deleteTopic()">Delete Topic</a>
+      <span *ngIf="deleting" class="text-danger">Deleting...</span>
+    </p>
+  </section>
+</ng-template>
