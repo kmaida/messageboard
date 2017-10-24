@@ -19,7 +19,6 @@ export class AuthService {
     scope: AUTH_CONFIG.SCOPE
   });
   userProfile: any;
-  userAlias: string;
   // Create a stream of logged in status to communicate throughout app
   loggedIn: boolean;
   loggedIn$ = new BehaviorSubject<boolean>(this.loggedIn);
@@ -104,7 +103,6 @@ export class AuthService {
     if (profile) {
       localStorage.setItem('profile', JSON.stringify(profile));
       this.userProfile = profile;
-      this.userAlias = profile['http://myapp.com/userdata'].alias || profile.nickname || profile.name;
     }
     // Update login status in loggedIn$ stream
     this.setLoggedIn(true);
