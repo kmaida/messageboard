@@ -5,9 +5,9 @@
       class="btn btn-sm btn-success"
       (click)="auth.login()">Log In</button>
 
-    <span *ngIf="auth.loggedIn && auth.userAlias">
+    <span *ngIf="auth.loggedIn">
       <img class="profileImg" [src]="auth.userProfile?.picture">
-      {{auth.userAlias}}
+      {{auth.userProfile?.name}}
       <button
         class="btn btn-sm btn-danger"
         (click)="auth.logout()">Log Out</button>

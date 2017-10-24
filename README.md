@@ -6,6 +6,24 @@ MEAN stack message board (forum) application with Auth0 authentication and passw
 
 * [node.js](https://nodejs.org) with npm
 * [Angular CLI](https://github.com/angular/angular-cli)
+* Auth0 account (see below)
+
+### Sign Up for Auth0
+
+You'll need an [Auth0](https://auth0.com) account to manage authentication. You can sign up for a [free account here](https://auth0.com/signup). Next, set up an Auth0 Client app and API so Auth0 can interface with an Angular app and Node API.
+
+### Set Up a Client App
+
+1. Go to your [**Auth0 Dashboard**](https://manage.auth0.com/#/) and click the "[create a new client](https://manage.auth0.com/#/clients/create)" button.
+2. Name your new app and select "Single Page Web Applications".
+3. In the **Settings** for your new Auth0 client app, add `http://localhost:4200/callback, http://localhost:8085/callback` to the **Allowed Callback URLs**.
+4. Add `http://localhost:4200, http://localhost:8085` to the **Allowed Web Origins**.
+5. Scroll down to the bottom of the **Settings** section and click "Show Advanced Settings". Choose the **OAuth** tab and verify that the **JsonWebToken Signature Algorithm** is set to `RS256`.
+6. If you'd like, you can [set up some social connections](https://manage.auth0.com/#/connections/social). You can then enable them for your app in the **Client** options under the **Connections** tab. The example shown in the screenshot above utilizes username/password database, Facebook, Google, and Twitter. For production, make sure you set up your own social keys and do not leave social connections set to use Auth0 dev keys.
+
+### Set Up an API
+
+Go to [**APIs**](https://manage.auth0.com/#/apis) in your Auth0 dashboard and click on the "Create API" button. Enter a name for the API. Set the **Identifier** to your API endpoint URL. In this example, this is `http://localhost:8085/api/`. The **Signing Algorithm** should be `RS256`.
 
 ## Installation
 
@@ -18,7 +36,7 @@ $ npm install
 ```
 
 1. Open `server/config.js.sample`, replace `[AUTH0_DOMAIN]` with your Auth0 domain, and remove `.sample` from the file name.
-2. Open `src/app/auth/auth0-variables.ts.sample` and replace `[AUTH0_CLIENT]` and `[AUTH0_DOMAIN]` with your Auth0 client ID and domain. Then remove `.sample` from the file name.
+2. Open `src/app/auth/auth0-variables.ts.sample` and replace `[AUTH0_CLIENT]` and `[AUTH0_DOMAIN]` with your Auth0 Client ID and domain. Then remove `.sample` from the file name.
 
 ## Serving the project
 
@@ -27,13 +45,13 @@ $ npm install
 * Node server: `NODE_ENV=dev node server.js` from the root folder.
 * Angular: `ng serve` from the root folder.
 
-API then runs on `localhost:8085` and app runs on `localhost:4200`.
+The API will run on `localhost:8085` and the app will run on `localhost:4200`.
 
 ### Staging / Production
 
 * Node server: `node server.js` from the root folder.
 
-App and API both run on `localhost:8085`.
+The app and API will both run on `localhost:8085`.
 
 ## What is Auth0?
 

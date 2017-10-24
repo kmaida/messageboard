@@ -50,7 +50,7 @@ export class PostFormComponent implements OnInit, OnDestroy {
   private _resetPostForm() {
     this.postForm = new PostModel(
       this.topicId,
-      this.auth.userAlias,
+      this.auth.userProfile.name,
       ''
     );
   }
