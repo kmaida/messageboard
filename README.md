@@ -11,16 +11,17 @@ MEAN stack message board (forum) application with Auth0 authentication and passw
 ### Set Up an Auth0 Client App
 
 1. Go to your [**Auth0 Dashboard**](https://manage.auth0.com/#/) and click the "[Create a New Client](https://manage.auth0.com/#/clients/create)" button.
-2. Give your new app a name, and then select "Single Page Web Applications".
+2. Give your new app a **name**, select **Single Page Web Applications**, then click the "Create" button.
 3. In the **Settings** for your new Auth0 Client app, add `http://localhost:4200/callback, http://localhost:8085/callback` to the **Allowed Callback URLs**.
 4. Add `http://localhost:4200, http://localhost:8085` to the **Allowed Web Origins**.
 5. Add `http://localhost:4200, http://localhost:8085` to the **Allowed Origins (CORS)**.
 6. Scroll down to the bottom of the **Settings** section and click "Show Advanced Settings". Choose the **OAuth** tab and verify that the **JsonWebToken Signature Algorithm** is set to `RS256`.
+7. Click the "Save Changes" button.
 
 ### Set Up Auth0 Passwordless Login
 
 1. Go to **Connections** -> [**Passwordless**](https://manage.auth0.com/#/connections/passwordless) and toggle on **Email**.
-2. Add `{ "scope": "openid profile" }` to **Authentication Parameters**.
+2. In the Email passwordless settings screen, add `{ "scope": "openid profile" }` to **Authentication Parameters**.
 3. Click the "Save" button.
 4. Click the **Apps** tab at the top of the window and find your newly-created Client. Toggle the switch **on**.
 5. Click the "Save" button.
@@ -49,14 +50,14 @@ $ npm install
 
 ### Development
 
-* Node server: `NODE_ENV=dev node server.js` from the root folder.
-* Angular: `ng serve` from the root folder.
+* Start Node API server: `NODE_ENV=dev node server.js` from the root folder.
+* Start Angular server: `ng serve` from the root folder.
 
 The API will run on `localhost:8085` and the app will run on `localhost:4200`.
 
 ### Staging / Production
 
-* Node server: `node server.js` from the root folder.
+* Start Node API and app server: `node server.js` from the root folder.
 
 The app and API will both run on `localhost:8085`.
 
@@ -70,11 +71,6 @@ Auth0 helps you to:
 * Support for generating signed [Json Web Tokens](https://docs.auth0.com/jwt) to call your APIs and **flow the user identity** securely.
 * Analytics of how, when and where users are logging in.
 * Pull data from other sources and add it to the user profile, through [JavaScript rules](https://docs.auth0.com/rules).
-
-## Create a Free Auth0 Account
-
-1. Go to [Auth0](https://auth0.com) and click Sign Up.
-2. Use Google, GitHub, or Microsoft Account to log in.
 
 ## Issue Reporting
 
