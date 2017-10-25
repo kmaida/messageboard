@@ -6,21 +6,18 @@ MEAN stack message board (forum) application with Auth0 authentication and passw
 
 * [node.js](https://nodejs.org) with npm
 * [Angular CLI](https://github.com/angular/angular-cli)
-* Auth0 account (see below)
+* [A free Auth0 account](https://auth0.com/signup)
 
-### Sign Up for Auth0
-
-You'll need an [Auth0](https://auth0.com) account to manage authentication. You can sign up for a [free account here](https://auth0.com/signup). Next, set up an Auth0 Client app and API so Auth0 can interface with an Angular app and Node API.
-
-### Set Up a Client App
+### Set Up an Auth0 Client App
 
 1. Go to your [**Auth0 Dashboard**](https://manage.auth0.com/#/) and click the "[Create a New Client](https://manage.auth0.com/#/clients/create)" button.
-2. Name your new app and select "Single Page Web Applications".
+2. Give your new app a name, and then select "Single Page Web Applications".
 3. In the **Settings** for your new Auth0 Client app, add `http://localhost:4200/callback, http://localhost:8085/callback` to the **Allowed Callback URLs**.
 4. Add `http://localhost:4200, http://localhost:8085` to the **Allowed Web Origins**.
-5. Scroll down to the bottom of the **Settings** section and click "Show Advanced Settings". Choose the **OAuth** tab and verify that the **JsonWebToken Signature Algorithm** is set to `RS256`.
+5. Add `http://localhost:4200, http://localhost:8085` to the **Allowed Origins (CORS)**.
+6. Scroll down to the bottom of the **Settings** section and click "Show Advanced Settings". Choose the **OAuth** tab and verify that the **JsonWebToken Signature Algorithm** is set to `RS256`.
 
-### Set Up Passwordless Login
+### Set Up Auth0 Passwordless Login
 
 1. Go to **Connections** -> [**Passwordless**](https://manage.auth0.com/#/connections/passwordless) and toggle on **Email**.
 2. Add `{ "scope": "openid profile" }` to **Authentication Parameters**.
@@ -31,7 +28,7 @@ You'll need an [Auth0](https://auth0.com) account to manage authentication. You 
 7. Using the **Default Templates** dropdown, switch to **Lock (Passwordless)**.
 8. Click the "Save" button.
 
-### Set Up an API
+### Set Up an API in Auth0
 
 Go to [**APIs**](https://manage.auth0.com/#/apis) in your Auth0 Dashboard and click on the "Create API" button. Enter a name for the API. Set the **Identifier** to `http://localhost:8085/api/`. The **Signing Algorithm** should be `RS256`.
 
