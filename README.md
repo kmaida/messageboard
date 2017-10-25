@@ -19,7 +19,17 @@ You'll need an [Auth0](https://auth0.com) account to manage authentication. You 
 3. In the **Settings** for your new Auth0 Client app, add `http://localhost:4200/callback, http://localhost:8085/callback` to the **Allowed Callback URLs**.
 4. Add `http://localhost:4200, http://localhost:8085` to the **Allowed Web Origins**.
 5. Scroll down to the bottom of the **Settings** section and click "Show Advanced Settings". Choose the **OAuth** tab and verify that the **JsonWebToken Signature Algorithm** is set to `RS256`.
-6. If you'd like, you can [set up some social connections](https://manage.auth0.com/#/connections/social). You can then enable them for your app in the **Client** options under the **Connections** tab. The example shown in the screenshot above utilizes username/password database, Facebook, Google, and Twitter. For production, make sure you set up your own social keys and do not leave social connections set to use Auth0 dev keys.
+
+### Set Up Passwordless Login
+
+1. Go to **Connections** -> [**Passwordless**](https://manage.auth0.com/#/connections/passwordless) and toggle on **Email**.
+2. Add `{ "scope": "openid profile" }` to **Authentication Parameters**.
+3. Click the "Save" button.
+4. Click the **Apps** tab at the top of the window and find your newly-created Client. Toggle the switch **on**.
+5. Click the "Save" button.
+6. Go to [**Hosted Pages**](https://manage.auth0.com/#/login_page). Toggle on the **Customize Login Page** option. This will enable you to modify the provided template.
+7. Using the **Default Templates** dropdown, switch to **Lock (Passwordless)**.
+8. Click the "Save" button.
 
 ### Set Up an API
 
