@@ -53,13 +53,19 @@ export class AuthService {
     // Set redirect after login
     const _redirect = redirect ? redirect : this.router.url;
     localStorage.setItem('authRedirect', _redirect);
-    // Auth0 authorize request
+    // Auth0 authorize request calls the centralized login page
+    // User should then be prompted for their email and be
+    // sent a passwordless code to enter in the login page
     this._auth0.authorize();
   }
 
   handleAuth() {
     this.authStatePending = window.location.hash ? true : false;
-    // When Auth0 hash parsed, get profile
+    // When user enters code at centralized login page, they
+    // are redirected back to app; this method is called by
+    // the root app component on load to parse the hash that
+    // is returned from Auth0 centralized login.
+    // When Auth0 hash parsed, execute _getProfile()
     this._auth0.parseHash(
       (err, authResult) => {
         if (authResult && authResult.accessToken && authResult.idToken) {
@@ -113,7 +119,6 @@ export class AuthService {
 
   private _redirect() {
     const redirect = localStorage.getItem('authRedirect');
-
     if (redirect && redirect.indexOf('#') > -1) {
       const redirectArr = redirect.split('#');
       const url = redirectArr[0];
@@ -155,6 +160,8 @@ export class AuthService {
   }
 
   renewToken() {
+    // Acquire new tokens silently in an iFrame, causing no
+    // disruption to the user's experience
     this._auth0.checkSession({},
       (err, authResult) => {
         if (authResult && authResult.accessToken) {
@@ -185,7 +192,7 @@ export class AuthService {
         return Observable.timer(Math.max(1, expires - now));
       }
     );
-
+    // Subscribe to expiresIn$ observable and renew token
     this.refreshSub = expiresIn$.subscribe(
       () => {
         this.renewToken();
