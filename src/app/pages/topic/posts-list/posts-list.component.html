@@ -19,7 +19,7 @@
           [index]="i"
           [topicId]="topicId"
           [editPostObj]="makeEditObj(post)"
-          (editPost)="onEditPost($event)"></app-post-form>
+          (editPost)="onEditPost($event, i)"></app-post-form>
         <div class="post-meta clearfix">
           <span class="float-left"><a [routerLink] fragment="post-{{i}}">#</a> {{post.author}} | {{post.datetime | date:'short'}} | <a [routerLink] fragment="post-{{i}}" (click)="editPost(post._id, i)">Edit Post</a></span>
           <span class="float-right"><a class="text-danger link" (click)="deletePost(post._id)">Delete</a></span>

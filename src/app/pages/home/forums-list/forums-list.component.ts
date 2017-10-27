@@ -52,16 +52,8 @@ export class ForumsListComponent implements OnInit, OnDestroy {
     this.editing = null;
   }
 
-  onEditForum(forumObj) {
-    const updatedForums = this.forums.map(
-      item => {
-        if (item._id === forumObj._id) {
-          item.title = forumObj.title;
-        }
-        return item;
-      }
-    );
-    this.forums = updatedForums;
+  onEditForum(forumObj, i) {
+    Object.assign(this.forums[i], forumObj);
     this.editing = null;
   }
 

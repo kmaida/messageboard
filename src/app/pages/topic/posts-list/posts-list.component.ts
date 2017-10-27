@@ -103,16 +103,8 @@ export class PostsListComponent implements OnInit, OnDestroy, AfterViewInit {
     this.editing = null;
   }
 
-  onEditPost(postObj) {
-    const updatedPosts = this.posts.map(
-      item => {
-        if (item._id === postObj._id) {
-          item.post_text = postObj.post_text;
-        }
-        return item;
-      }
-    );
-    this.posts = updatedPosts;
+  onEditPost(postObj, i) {
+    Object.assign(this.posts[i], postObj);
     this.editing = null;
   }
 

@@ -15,7 +15,7 @@
           *ngIf="editingThisForum(forum._id)"
           (cancelEdit)="onCancelEdit()"
           [editForumObj]="makeEditObj(forum)"
-          (editForum)="onEditForum($event)"
+          (editForum)="onEditForum($event, i)"
           class="w-100"></app-forum-form>
         <ng-template [ngIf]="!editingThisForum(forum._id)">
           <a [routerLink]="['/forum', forum._id]" class="text-dark">
@@ -27,7 +27,7 @@
     </div>
   </div>
 
-  <section>
+  <section id="newForum">
     <button
       *ngIf="!showForumForm"
       class="btn btn-primary btn-block"
