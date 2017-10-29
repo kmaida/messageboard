@@ -12,7 +12,7 @@
     [disabled]="submitting"></textarea>
   <p class="text-right pt-2">
     <app-loading
-      *ngIf="submitting"
+      [hidden]="!submitting"
       size="small"></app-loading>
     <ng-template [ngIf]="!submitting">
       <a
