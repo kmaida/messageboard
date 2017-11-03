@@ -84,7 +84,7 @@ $ npm install
 
 ### Development
 
-* Start Node API server: `NODE_ENV=dev node server.js` from the root folder.
+* Start Node API server: `NODE_ENV=dev node server` from the root folder.
 * Start Angular server: `ng serve` from the root folder.
 
 The API will run on `localhost:8085` and the app will run on `localhost:4200`.
@@ -92,7 +92,7 @@ The API will run on `localhost:8085` and the app will run on `localhost:4200`.
 ### Staging / Production
 
 * Run `ng build` to compile the Angular project from the root folder.
-* Start Node API and app server: `node server.js` from the root folder.
+* Start Node API and app server: `node server` from the root folder.
 
 The app and API will both run on `localhost:8085`.
 
