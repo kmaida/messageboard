@@ -76,6 +76,8 @@ export class PostsListComponent implements OnInit, OnDestroy, AfterViewInit {
           this.scrollToAnchor(this.initialScrollPostId);
         }
         this.ngForRendered = true;
+        // unsubscribe: only want this for initial render
+        this.postListSub.unsubscribe();
       }
     );
   }
@@ -97,6 +99,7 @@ export class PostsListComponent implements OnInit, OnDestroy, AfterViewInit {
   onSubmitPost(postObj) {
     const updatedPosts = [...this.posts, postObj];
     this.posts = updatedPosts;
+    this.latestPostId = `post-${this.posts.length - 1}`;
   }
 
   onCancelEdit() {
@@ -149,6 +152,7 @@ export class PostsListComponent implements OnInit, OnDestroy, AfterViewInit {
     );
     this.posts = updatedPosts;
     this.deleteError = null;
+    this.latestPostId = `post-${this.posts.length - 1}`;
   }
 
   ngOnDestroy() {
