@@ -2689,6 +2689,8 @@ var PostsListComponent = (function () {
                 _this.scrollToAnchor(_this.initialScrollPostId);
             }
             _this.ngForRendered = true;
+            // unsubscribe: only want this for initial render
+            _this.postListSub.unsubscribe();
         });
     };
     PostsListComponent.prototype.trackPosts = function (index) {
@@ -2700,6 +2702,7 @@ var PostsListComponent = (function () {
     PostsListComponent.prototype.onSubmitPost = function (postObj) {
         var updatedPosts = this.posts.concat([postObj]);
         this.posts = updatedPosts;
+        this.latestPostId = "post-" + (this.posts.length - 1);
     };
     PostsListComponent.prototype.onCancelEdit = function () {
         this.editing = null;
@@ -2740,6 +2743,7 @@ var PostsListComponent = (function () {
         var updatedPosts = this.posts.filter(function (item) { return item._id !== id; });
         this.posts = updatedPosts;
         this.deleteError = null;
+        this.latestPostId = "post-" + (this.posts.length - 1);
     };
     PostsListComponent.prototype.ngOnDestroy = function () {
         this.postsSub.unsubscribe();
