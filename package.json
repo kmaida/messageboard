@@ -28,7 +28,7 @@
     "express-jwt": "^5.3.0",
     "jwks-rsa": "^1.2.0",
     "method-override": "^2.3.10",
-    "mongoose": "^4.12.1",
+    "mongoose": "^4.13.21",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.14"
   },
